@@ -4,12 +4,12 @@ const MoveBullet = (bulletFlag) => {
   const [y, updateY] = useState(0)
   const handleUpdateY = () => {
     if (bulletFlag){
-      updateY(y - 5)
+      updateY(y - 20)
     }
   }
 
   useEffect(() => {
-    setTimeout(handleUpdateY, 10);
+    setTimeout(handleUpdateY, 50);
   }, [bulletFlag, y]);
 
   return y
