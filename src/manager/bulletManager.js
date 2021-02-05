@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
+import MoveBullet from "./moveBullet";
 
 const BulletManagaer = () => {
   const [bulletFlag, updateBalletFlag] = useState(false)
-  const [y, updateY] = useState(0)
-  
-  const handleUpdateY = () => {
-    if (bulletFlag){
-      updateY(y - 5)
-    }
-  }
-
+  const y = MoveBullet(bulletFlag)
   const handlebulletFlag = () => {
     updateBalletFlag(true)
   }
@@ -17,10 +11,6 @@ const BulletManagaer = () => {
   useEffect(() => {
     document.addEventListener("keydown",  handlebulletFlag, false);
   }, []);
-
-  useEffect(() => {
-    setTimeout(handleUpdateY, 10);
-  }, [bulletFlag, y]);
 
   return [bulletFlag, y]
 }

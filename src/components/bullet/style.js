@@ -1,15 +1,15 @@
 // 弾のスタイルを表すフック
 import BulletSize from "./size"
 import { useState, useEffect } from "react"
-const Style = (BulletManagaer, position) => {
-  const [bulletFlag, y] = BulletManagaer
-  const [airCraftX, airCraftY] = position
-  const [initialX, SetIniatilX] = useState(0)
-  const [initialY, SetIniatilY] = useState(0)
+const Style = (BulletManagaer, airCraftPosition) => {
+  const [bulletFlag, deltaY] = BulletManagaer
+  const [airCraftX, airCraftY] = airCraftPosition
+  const [initialX, SetInitialX] = useState(0)
+  const [initialY, SetInitialY] = useState(0)
 
   useEffect(() => {
-    SetIniatilX(airCraftX - BulletSize.width / 2)
-    SetIniatilY(airCraftY)
+    SetInitialX(airCraftX - BulletSize.width / 2)
+    SetInitialY(airCraftY)
   }, [bulletFlag]);
 
   return {
@@ -17,11 +17,10 @@ const Style = (BulletManagaer, position) => {
     width: BulletSize.width,
     height: BulletSize.height,
     left: initialX,
-    top:  initialY + y - BulletSize.height / 2,
+    top:  initialY + deltaY - BulletSize.height / 2,
     scale: 0.5,
     opacity: bulletFlag ? "1.0" : "0",
   }
 }
-
 
 export default Style
