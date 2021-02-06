@@ -6,7 +6,7 @@ export default function(props){
   return(
   <img
     src = {imgPath}
-    style = {BulletStyle(props.deltaY, props.airCraftPosition)}
+    style = {BulletStyle(props.bulletPosition)}
   />
   )
 }

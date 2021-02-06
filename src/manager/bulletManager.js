@@ -1,21 +1,31 @@
 import { useState, useEffect } from "react";
 
-const BulletManagaer = () => {
-  const rangeDistance = -300
-  const [ yList, setYList] = useState([])
+const BulletManagaer = (airCraftPosition) => {
+  const rangeDistance = -100
+  const [bulletPosition, setBulletPosition] = useState([])
   const handleBulletCreation = () => {
-    setYList([...yList, 0])
+    const [x, y] = [-200, -200]
+    setBulletPosition([...bulletPosition, { x, y }])
   }
 
-  const handleBulletY = () => {
-    const copy = yList.slice();
-    if (yList[yList.length - 1] > rangeDistance){
-      copy[copy.length - 1] = copy[copy.length - 1] - 20
+  const handleBulletPosition = () => {
+    const copy = bulletPosition.slice();
+
+    // 初期値なら期待のポジションに位置させる
+    if (bulletPosition[bulletPosition.length - 1].x == -200 && bulletPosition[bulletPosition.length - 1].y == -200)
+    {
+      const x = airCraftPosition.x
+      const y = airCraftPosition.y
+      copy[copy.length - 1].x = x
+      copy[copy.length - 1].y = y
+    }
+    else if (bulletPosition[bulletPosition.length - 1].y > rangeDistance){
+      copy[copy.length - 1].y = copy[copy.length - 1].y - 20
     }
     else{
       copy.pop()
     }
-    setYList(copy)
+    setBulletPosition(copy)
   }
 
   useEffect(() => {
@@ -23,12 +33,12 @@ const BulletManagaer = () => {
   }, []);
 
   useEffect(() => {
-    if(yList.length > 0){
-      setTimeout(handleBulletY, 50);
+    if(bulletPosition.length > 0){
+      setTimeout(handleBulletPosition, 50);
     }
-  }, [yList]);
+  }, [bulletPosition]);
 
-  return { yList, setYList}
+  return bulletPosition
 }
 
 export default BulletManagaer

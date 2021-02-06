@@ -10,6 +10,6 @@ const AirCraftPositionManager = () => {
     updataX(event.clientX)
     updataY(event.clientY)
   }
-  return [ x, y ]
+  return { x, y }
 }
 export default AirCraftPositionManager

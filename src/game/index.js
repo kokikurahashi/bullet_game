@@ -1,22 +1,24 @@
 import React from "react";
 import AirCraft from "../components/airCraft"
 import Bullet from "../components/bullet"
-import AirCraftPositionManager from "../manager/airCraftPositionManager"
+import Enemy from "../components/enemy"
 import BulletManagaer from "../manager/bulletManager"
+import AirCraftPositionManager from "../manager/airCraftPositionManager"
 export default function(){
-  const airCraftPosition = AirCraftPositionManager() // 弾の動き制御開始
-  const bulletManagaer = BulletManagaer()
-
+  const airCraftPosition = AirCraftPositionManager()
+  const bulletPosition = BulletManagaer(airCraftPosition) // 弾の動き制御開始
   return(
     <div>
+      <Enemy 
+        bulletPosition={bulletPosition}
+      />
       <AirCraft
         airCraftPosition={airCraftPosition}
       />
-      { bulletManagaer.yList.map((y, index) => {
+      { bulletPosition.map((position, index) => {
         return (
           <Bullet
-            deltaY={y}
-            airCraftPosition={airCraftPosition}
+            bulletPosition={position}
             key={index}
           />
         )
