@@ -1,9 +1,8 @@
 // 機体のスタイルを表すフック
-
 import AirCraftSize from "./size"
-import AirCraftPosition from "./position"
-const Style = () => {
-  const [x, y] = AirCraftPosition()
+
+const Style = (airCraftPosition) => {
+  const [x, y] = airCraftPosition
   return {
     position: 'absolute',
     width: AirCraftSize.width,

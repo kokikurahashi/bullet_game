@@ -1,7 +1,7 @@
 // 機体の座標を表すカスタムフック
 import {useState} from "react";
-  
-const Position = () => {
+
+const AirCraftPositionManager = () => {
   const [x, updataX] = useState(0)
   const [y, updataY] = useState(0)
   window.onmousemove = handleMouseMove;
@@ -12,4 +12,4 @@ const Position = () => {
   }
   return [ x, y ]
 }
-export default Position
+export default AirCraftPositionManager

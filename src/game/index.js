@@ -1,14 +1,26 @@
 import React from "react";
-import AirCraftStyles from "../components/airCraft/style"
+import AirCraft from "../components/airCraft"
+import Bullet from "../components/bullet"
+import AirCraftPositionManager from "../manager/airCraftPositionManager"
+import BulletManagaer from "../manager/bulletManager"
 export default function(){
-  const imgPath = `images/airCraft.jpg`
+  const airCraftPosition = AirCraftPositionManager() // 弾の動き制御開始
+  const bulletManagaer = BulletManagaer()
+
   return(
     <div>
-      <img
-        src = {imgPath}
-        style = {AirCraftStyles()}
-      >
-      </img>
+      <AirCraft
+        airCraftPosition={airCraftPosition}
+      />
+      { bulletManagaer.yList.map((y, index) => {
+        return (
+          <Bullet
+            deltaY={y}
+            airCraftPosition={airCraftPosition}
+            key={index}
+          />
+        )
+      })}
     </div>
   )
 }
