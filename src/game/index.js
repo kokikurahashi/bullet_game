@@ -5,15 +5,22 @@ import AirCraftPositionManager from "../manager/airCraftPositionManager"
 import BulletManagaer from "../manager/bulletManager"
 export default function(){
   const airCraftPosition = AirCraftPositionManager() // 弾の動き制御開始
+  const bulletManagaer = BulletManagaer()
+
   return(
     <div>
       <AirCraft
         airCraftPosition={airCraftPosition}
       />
-      <Bullet
-        BulletManagaer={BulletManagaer}
-        airCraftPosition={airCraftPosition}
-      />
+      { bulletManagaer.yList.map((y, index) => {
+        return (
+          <Bullet
+            deltaY={y}
+            airCraftPosition={airCraftPosition}
+            key={index}
+          />
+        )
+      })}
     </div>
   )
 }
